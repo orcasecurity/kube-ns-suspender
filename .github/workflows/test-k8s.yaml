@@ -31,7 +31,7 @@ env:
 
 jobs:
   changes:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     outputs:
       run: ${{ steps.filter.outputs.run }}
     steps:
@@ -75,7 +75,7 @@ jobs:
   build-image:
     needs: changes
     if: needs.changes.outputs.run == 'true'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -119,7 +119,7 @@ jobs:
       - changes
       - build-image
     if: needs.changes.outputs.run == 'true'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       # Needed to get config and tests
       - name: Checkout repository
@@ -180,7 +180,7 @@ jobs:
       - changes
       - test-e2e
     if: (needs.changes.outputs.run == 'true' && github.event_name != 'pull_request')
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     # Permissions for the Built-in, auto-loaded secrets.GITHUB_TOKEN
     permissions:
       contents: read
